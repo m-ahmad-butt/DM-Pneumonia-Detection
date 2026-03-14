@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+/chest_xray
+/training_logs
+/pre-processing/ahmad/fix/training_logs
+/pre-processing/ahmad/results
+/pre-processing/chest_xray
+xray_cnn_model.keras
+/pre-processing/ahmad/actual/training_logs
+pre-processing/ahmad/actual/xray_mobilenet_model.keras
