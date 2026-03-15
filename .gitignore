@@ -213,3 +213,5 @@ __marimo__/
 xray_cnn_model.keras
 /pre-processing/ahmad/actual/training_logs
 pre-processing/ahmad/actual/xray_mobilenet_model.keras
+/results
+.vscode/settings.json
