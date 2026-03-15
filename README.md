@@ -4,6 +4,8 @@
 **Dataset:** [Kaggle — Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)  
 **Model:** MobileNetV2 Transfer Learning  
 
+**DEMO:**
+![DEMO](results/ui.png) 
 
 ## 1. Environment Setup
 

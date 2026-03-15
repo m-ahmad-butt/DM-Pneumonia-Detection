@@ -7,3 +7,11 @@ Pillow
 seaborn
 tqdm
 scikit-learn
+
+fastapi
+uvicorn
+python-multipart
+tensorflow
+numpy
+opencv-python-headless
+pydantic
