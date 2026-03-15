@@ -308,7 +308,7 @@ python3 pre-processing/ahmad/train.py
 
 The green dashed line marks where Phase 2 fine-tuning begins.
 
-![Training Curves](training_logs/training_curves.png)
+![Training Curves](results/training_curves.png)
 
 **Phase 1 — Epoch log (selected)**
 
