@@ -1,0 +1,9 @@
+tensorflow[and-cuda]
+opencv-python
+numpy
+matplotlib
+scikit-image
+Pillow
+seaborn
+tqdm
+scikit-learn
