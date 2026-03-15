@@ -215,3 +215,5 @@ xray_cnn_model.keras
 pre-processing/ahmad/actual/xray_mobilenet_model.keras
 /results
 .vscode/settings.json
+/rough_work/ahmad/results
+/rough_work/chest_xray
