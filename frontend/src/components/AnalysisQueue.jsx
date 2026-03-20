@@ -7,14 +7,29 @@ export const AnalysisQueue = ({
   allPredicted,
   isAnyPredicting
 }) => {
+
+  // Summary counts for the header bar
+  const predicted   = images.filter(img => img.prediction !== null);
+  const pneumoniaCount = predicted.filter(img => img.prediction === 'PNEUMONIA').length;
+  const normalCount    = predicted.filter(img => img.prediction === 'NORMAL').length;
+  const errorCount     = images.filter(img => img.error !== null).length;
+
   return (
     <div className="right-panel">
       {images.length > 0 ? (
         <section className="results-section">
           <div className="results-header">
-            <h2 className="section-title">
-              Analysis Queue [{images.length}]
-            </h2>
+            <div>
+              <h2 className="section-title">Analysis Queue [{images.length}]</h2>
+              {predicted.length > 0 && (
+                <p className="queue-summary">
+                  {predicted.length}/{images.length} scanned
+                  {pneumoniaCount > 0 && <span className="summary-pneumonia"> · {pneumoniaCount} Pneumonia</span>}
+                  {normalCount    > 0 && <span className="summary-normal"> · {normalCount} Normal</span>}
+                  {errorCount     > 0 && <span className="summary-error"> · {errorCount} Error</span>}
+                </p>
+              )}
+            </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <button
                 className="btn btn-predict-all"
@@ -24,13 +39,13 @@ export const AnalysisQueue = ({
               >
                 CLEAR ALL
               </button>
-              {!allPredicted && images.length > 1 && (
+              {!allPredicted && images.length >= 1 && (
                 <button
                   className="btn btn-predict-all"
                   onClick={predictAllImages}
                   disabled={isAnyPredicting}
                 >
-                  RUN ALL
+                  {isAnyPredicting ? 'SCANNING...' : 'RUN ALL'}
                 </button>
               )}
             </div>
@@ -38,11 +53,9 @@ export const AnalysisQueue = ({
 
           <div className="image-grid">
             {images.map(img => (
-              <div key={img.id} className="image-card">
+              <div key={img.id} className={`image-card ${img.prediction === 'PNEUMONIA' ? 'card-pneumonia' : ''}`}>
                 <div className="image-preview-container">
-                  <button className="remove-btn" onClick={() => removeImage(img.id)} aria-label="Remove image">
-                    ✕
-                  </button>
+                  <button className="remove-btn" onClick={() => removeImage(img.id)} aria-label="Remove image">✕</button>
                   {img.isPredicting && <div className="scanning-line"></div>}
                   <img src={img.preview} alt={img.name} className="image-preview" />
                 </div>
@@ -50,12 +63,12 @@ export const AnalysisQueue = ({
                 <div className="card-content">
                   <p className="filename" title={img.name}>{img.name}</p>
 
-                  {img.prediction === null && !img.isPredicting && (
-                    <div className="result-badge pending">
-                      Awaiting
-                    </div>
+                  {/* ── Awaiting ── */}
+                  {img.prediction === null && !img.isPredicting && !img.error && (
+                    <div className="result-badge pending">Awaiting</div>
                   )}
 
+                  {/* ── Scanning ── */}
                   {img.isPredicting && (
                     <div className="result-badge pending" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       Scanning
@@ -67,25 +80,51 @@ export const AnalysisQueue = ({
                     </div>
                   )}
 
+                  {/* ── PNEUMONIA result ── */}
                   {img.prediction === 'PNEUMONIA' && (
-                    <div className="result-badge pneumonia">
-                      PNEUMONIA
-                    </div>
+                    <>
+                      <div className="result-badge pneumonia">PNEUMONIA</div>
+                      <p className="confidence-text confidence-pneumonia">
+                        Confidence: {(img.confidence * 100).toFixed(1)}%
+                      </p>
+                    </>
                   )}
 
+                  {/* ── NORMAL result ── */}
                   {img.prediction === 'NORMAL' && (
-                    <div className="result-badge normal">
-                      NORMAL
-                    </div>
+                    <>
+                      <div className="result-badge normal">NORMAL</div>
+                      <p className="confidence-text confidence-normal">
+                        Confidence: {((1 - img.confidence) * 100).toFixed(1)}%
+                      </p>
+                    </>
                   )}
 
-                  {!img.prediction && (
+                  {/* ── Error ── */}
+                  {img.error && !img.isPredicting && (
+                    <div className="result-badge error" title={img.error}>ERROR</div>
+                  )}
+
+                  {/* ── Action button (only while not yet predicted) ── */}
+                  {!img.prediction && !img.error && (
                     <button
                       className="btn"
                       onClick={() => predictSingleImage(img.id)}
                       disabled={img.isPredicting || isAnyPredicting}
                     >
                       {img.isPredicting ? 'SCANNING...' : 'DIAGNOSE'}
+                    </button>
+                  )}
+
+                  {/* ── Retry button on error ── */}
+                  {img.error && !img.isPredicting && (
+                    <button
+                      className="btn"
+                      onClick={() => predictSingleImage(img.id)}
+                      disabled={isAnyPredicting}
+                      style={{ marginTop: '0.5rem' }}
+                    >
+                      RETRY
                     </button>
                   )}
                 </div>

@@ -1,5 +1,5 @@
-tensorflow[and-cuda]
-opencv-python
+# ── ML / Training (run in WSL2 with GPU) ──────────────────────────────────────
+tensorflow[and-cuda]    # GPU-accelerated TF; use plain 'tensorflow' on CPU-only
 numpy
 matplotlib
 scikit-image
@@ -8,10 +8,12 @@ seaborn
 tqdm
 scikit-learn
 
+# ── Backend API ────────────────────────────────────────────────────────────────
 fastapi
 uvicorn
 python-multipart
-tensorflow
-numpy
-opencv-python-headless
 pydantic
+
+# ── Shared (image processing) ─────────────────────────────────────────────────
+# Use opencv-python-headless everywhere — no GUI dependency, works in WSL2 & server
+opencv-python-headless

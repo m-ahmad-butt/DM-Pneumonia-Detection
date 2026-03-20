@@ -11,7 +11,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 MODEL_PATH = str(SCRIPT_DIR / 'xray_mobilenet_model.keras')
 IMG_SIZE = (128, 128)
 
-DECISION_THRESHOLD = 0.50 
+DECISION_THRESHOLD = 0.70  # matches backend/main.py and README-documented production threshold
 
 print(f"[*] Loading model from {MODEL_PATH}...")
 try:

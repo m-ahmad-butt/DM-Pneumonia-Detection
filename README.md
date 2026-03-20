@@ -303,7 +303,7 @@ Unfrozen layers: 14 of 154
 source ~/xray_venv/bin/activate
 export LD_LIBRARY_PATH=$(find ~/xray_venv -path "*/nvidia/*/lib" -type d 2>/dev/null | tr '\n' ':')$LD_LIBRARY_PATH
 cd /mnt/c/Users/ahmad/Downloads/quiz/DM-Pneumonia-Detection
-python3 pre-processing/ahmad/train.py
+python3 model/train.py
 ```
 
 ### Training Curves
