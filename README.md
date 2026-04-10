@@ -2,7 +2,8 @@
 
 **Course:** Data Mining | FAST NUCES  
 **Dataset:** [Kaggle — Chest X-Ray Images (Pneumonia)](https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia)  
-**Model:** MobileNetV2 Transfer Learning  
+**Model:** MobileNetV2 Transfer Learning <br>
+**Hugging Face:** [pneumonia-detection-model](https://huggingface.co/m-ahmad-butt/pneumonia-detection-model)
 
 **DEMO:**
 ![DEMO](results/ui.png) 
