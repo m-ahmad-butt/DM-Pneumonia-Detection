@@ -56,7 +56,7 @@ REDUCE_LR_FACTOR    = 0.5
 REDUCE_LR_MIN       = 1e-7
 
 # decision threshold
-DECISION_THRESHOLD = 0.40
+DECISION_THRESHOLD = 0.70
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
@@ -217,9 +217,9 @@ def get_callbacks(suffix=''):
 
 
 # PHASE 1 — TRAIN HEAD ONLY (base frozen)
-print("\n" + "=" * 55)
+print("\n" + "-" * 55)
 print("PHASE 1 — TRAINING HEAD (base frozen)")
-print("=" * 55)
+print("-" * 55)
 
 history_phase1 = model.fit(
     X_train, y_train,
@@ -235,9 +235,9 @@ print(f"\nPhase 1 complete. Best model: {MODEL_SAVE_PATH}")
 
 
 # PHASE 2 — FINE-TUNING (last 14 layers only)
-print("\n" + "=" * 55)
+print("\n" + "-" * 55)
 print(f"PHASE 2 — FINE-TUNING (last {len(base_model.layers) - FINE_TUNE_AT_LAYER} layers)")
-print("=" * 55)
+print("-" * 55)
 
 base_model.trainable = True
 for layer in base_model.layers[:FINE_TUNE_AT_LAYER]:

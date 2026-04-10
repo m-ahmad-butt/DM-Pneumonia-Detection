@@ -219,3 +219,7 @@ pre-processing/ahmad/actual/xray_mobilenet_model.keras
 /pre-processing/rough_work/chest_xray
 t.txt
 /hf-space
+/model/training_logs
+model/xray_mobilenet_model.keras
+model/xray_mobilenet_model.keras
+/model/extracted_features
