@@ -1,6 +1,7 @@
 import numpy as np
 from pathlib import Path
 from tensorflow import keras
+from tensorflow.keras import layers
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -23,8 +24,6 @@ print(f"   Total pixel values: {sample_img.shape[0]} x {sample_img.shape[1]} = {
 print(f"\n2. LOADING CNN MODEL...")
 
 # Create custom Dense layer that properly handles quantization_config
-from tensorflow.keras import layers
-
 class CompatibleDense(layers.Dense):
     def __init__(self, *args, quantization_config=None, **kwargs):
         # Remove quantization_config before passing to parent

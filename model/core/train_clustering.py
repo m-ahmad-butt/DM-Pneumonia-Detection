@@ -1,8 +1,3 @@
-"""
-Clustering Analysis - 5 Techniques
-K-Means, K-Medoids, Single Linkage, Complete Linkage, BIRCH
-"""
-
 import numpy as np
 from pathlib import Path
 from sklearn.cluster import KMeans, AgglomerativeClustering, Birch

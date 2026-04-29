@@ -1,7 +1,7 @@
 # Preprocessing Evaluation Metrics
 ---
 
-## 1. CONTRAST (Standard Deviation)
+## 1. CONTRAST (Standard Deviation) Contrast quality
 
 ### What it measures:
 The spread of pixel intensity values in the image.
@@ -193,7 +193,7 @@ That's why we use it WITH other metrics.
 
 ---
 
-## 6. DYNAMIC RANGE
+## 6. DYNAMIC RANGE Intensity coverage
 
 ### What it measures:
 The range of intensity values from darkest to brightest pixel. Measures how much of the available intensity scale (0-255) your image is using.

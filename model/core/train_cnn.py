@@ -1,7 +1,3 @@
-"""
-Pure CNN Training - MobileNetV2
-"""
-
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -56,13 +52,21 @@ X_test_rgb = np.repeat(X_test, 3, axis=-1)
 
 # Build model
 print("\nBuilding MobileNetV2 model...")
+# pretained model trained on imagenet dataset, inlcudetop means remove pooling and desne (we have our own classes not 1000)
 base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(128, 128, 3))
 base_model.trainable = False
 
+# conv layer output
 x = base_model.output
+
+# onverts feature maps to single vector
 x = GlobalAveragePooling2D()(x)
+
+# dense layer
 x = Dense(128, activation='relu')(x)
 x = Dropout(0.5)(x)
+
+# final binary class
 predictions = Dense(1, activation='sigmoid')(x)
 
 model = Model(inputs=base_model.input, outputs=predictions)
